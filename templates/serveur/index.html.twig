@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServeurController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1600px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! </h1>
+    <a href={{path('app_restaurent')}}>retour</a><br/><br/>
+    {% if serv is defined %}
+    {% for serveur in serv %}
+    id : {{serveur.id}} / name : {{serveur.nom}} / date : {{serveur.datenaissance|date("d-m-Y")}} / restaurent : {{serveur.restoId.id}} <a href={{path('app_serveur_delete',{id: serveur.id})}}>delete serveur</a>
+     <a href={{path('app_serveur_edit',{id: serveur.id})}}>modif serveur</a> <br/>
+
+    {% endfor%}
+    {%else%}
+        <a href={{path('app_serveur_list')}}>display list serveurs</a><br/>
+    {%endif%}
+
+    {% if FormEdit is defined %}
+    {{ form_start(FormEdit) }}
+    {{ form_widget(FormEdit) }}
+    {{ form_end(FormEdit) }}
+    {%endif%}
+
+    {% if Form is defined %}
+    {{ form_start(Form) }}
+    {{ form_widget(Form) }}
+    {{ form_end(Form) }}
+    {%else%}
+<a href={{path('app_serveur_add')}}>add serveur</a><br/>
+    {%endif%}
+
+
+    {% if restoserv is defined %}
+    {% for serveur in restoserv %}
+    id : {{serveur.id}} / name : {{serveur.nom}} / date : {{serveur.datenaissance|date("d-m-Y")}} / restaurent : {{serveur.restoId.id}} <a href={{path('app_serveur_delete',{id: serveur.id})}}>delete serveur</a>
+     <a href={{path('app_serveur_edit',{id: serveur.id})}}>modif serveur</a> <br/>
+
+    {% endfor%}
+    {%endif%}
+
+</div>
+{% endblock %}

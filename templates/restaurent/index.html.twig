@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RestaurentController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1600px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}!</h1>
+    {% if resto is defined %}
+    {% for restoo in resto %}
+    id : {{restoo.id}} / name : {{restoo.nom}} / adresse : {{restoo.adresse}}
+    <a href={{path('app_resto_delete',{id: restoo.id})}}>delete restaurent</a> / <a href={{path('app_resto_edit',{id: restoo.id})}}>modif restaurent</a>
+    / <a href={{path('app_resto_serveur_list',{restoid: restoo.id})}}>serveurs of this restaurent</a> <br/>
+    {% endfor%}
+<br/>
+<a href={{path('app_resto_add')}}>add restaurent</a><br/>
+    {%else%}
+       <a href={{path('app_resto_list')}}>display list restaurent</a><br/>
+    {%endif%}
+
+    <a href={{path('app_serveur_list')}}>display list serveurs</a>
+
+    {% if Form is defined %}
+    {{ form_start(Form) }}
+    {{ form_widget(Form) }}
+    {{ form_end(Form) }}
+    {%endif%}
+
+    {% if FormEdit is defined %}
+    {{ form_start(FormEdit) }}
+    {{ form_widget(FormEdit) }}
+    {{ form_end(FormEdit) }}
+    {%endif%}
+
+</div>
+{% endblock %}
